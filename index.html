@@ -211,7 +211,7 @@ function renderQuestions() {
             '<div class="options">' +
                 question.o.map(function(option, optIndex) {
                     return '<div class="option" onclick="selectAnswer(' + index + ', ' + optIndex + ')" id="q' + index + '_opt' + optIndex + '">' +
-                           '<strong>' + String.fromCharCode(97 + optIndex) + ') </strong>' + option +
+                           '<strong>' + String.fromCharCode(97 + optIndex) + ')&nbsp;</strong>' + option +
                            '</div>';
                 }).join('') +
             '</div>' +
