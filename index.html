@@ -86,7 +86,28 @@ function displayFlashcard() {
     
     document.getElementById("flashcardNumber").textContent = (currentFlashcardIndex + 1) + " / " + flashcardQuestions.length;
     document.getElementById("flashcardSection").textContent = question.s;
-    document.getElementById("flashcardQuestion").textContent = question.q;
+    
+    // Check if question needs answer choices displayed
+    var questionText = question.q.toLowerCase();
+    var needsChoices = questionText.includes("which of the following") || 
+                      questionText.includes("all of the following") || 
+                      questionText.includes("which one of the following") ||
+                      questionText.includes("all except") ||
+                      questionText.includes("except which") ||
+                      questionText.includes("which is not") ||
+                      questionText.includes("which are not") ||
+                      questionText.includes("select all") ||
+                      questionText.includes("choose all");
+    
+    var displayQuestion = question.q;
+    if (needsChoices) {
+        displayQuestion += "\n\n";
+        for (var i = 0; i < question.o.length; i++) {
+            displayQuestion += String.fromCharCode(97 + i) + ") " + question.o[i] + "\n";
+        }
+    }
+    
+    document.getElementById("flashcardQuestion").textContent = displayQuestion;
     document.getElementById("flashcardAnswer").textContent = correctAnswer;
     document.getElementById("flashcardExplanation").textContent = question.e;
     
