@@ -99,15 +99,17 @@ function displayFlashcard() {
                       questionText.includes("select all") ||
                       questionText.includes("choose all");
     
-    var displayQuestion = question.q;
+    var flashcardQuestion = document.getElementById("flashcardQuestion");
     if (needsChoices) {
-        displayQuestion += "\n\n";
+        var optionsHtml = "<div style='margin-bottom: 20px;'>" + question.q + "</div>";
         for (var i = 0; i < question.o.length; i++) {
-            displayQuestion += String.fromCharCode(97 + i) + ") " + question.o[i] + "\n";
+            optionsHtml += "<div style='margin-bottom: 8px; text-align: left;'>" + 
+                          String.fromCharCode(97 + i) + ") " + question.o[i] + "</div>";
         }
+        flashcardQuestion.innerHTML = optionsHtml;
+    } else {
+        flashcardQuestion.textContent = question.q;
     }
-    
-    document.getElementById("flashcardQuestion").textContent = displayQuestion;
     document.getElementById("flashcardAnswer").textContent = correctAnswer;
     document.getElementById("flashcardExplanation").textContent = question.e;
     
